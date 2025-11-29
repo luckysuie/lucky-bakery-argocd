@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: lucky-bakery
+  labels:
+    app: lucky-bakery
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: lucky-bakery
+  template:
+    metadata:
+      labels:
+        app: lucky-bakery
+    spec:
+      containers:
+      - name: lucky-bakery
+        image: YOUR-ACR-NAME.azurecr.io/lucky-bakery:v1
+        ports:
+        - containerPort: 80
