@@ -6,7 +6,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/YOUR-GITHUB-USERNAME/lucky-bakery-argocd.git
+    repoURL: https://github.com/luckysuie/lucky-bakery-argocd.git
     targetRevision: main
     path: k8s
   destination:
@@ -16,3 +16,4 @@ spec:
     automated:
       prune: true
       selfHeal: true
+

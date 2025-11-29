@@ -16,6 +16,7 @@ spec:
     spec:
       containers:
       - name: lucky-bakery
-        image: YOUR-ACR-NAME.azurecr.io/lucky-bakery:v1
+        image: lucky1856/lucky-bakery:v1
         ports:
         - containerPort: 80
+
