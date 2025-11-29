@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Lucky Bakery - Welcome</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    :root {
+      --primary: #ffb3b3;
+      --primary-dark: #ff8c94;
+      --accent: #ffe9a7;
+      --text: #333333;
+      --bg: #fff7f7;
+      --card-bg: #ffffff;
+      --shadow: 0 8px 20px rgba(0,0,0,0.08);
+      --radius: 18px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Roboto, sans-serif;
+    }
+
+    body {
+      background: radial-gradient(circle at top, #fff0f5 0, #fff 55%);
+      color: var(--text);
+      line-height: 1.5;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    }
+
+    .nav {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0.8rem 1.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-weight: 700;
+      font-size: 1.25rem;
+      color: #e85d75;
+    }
+
+    .logo-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: conic-gradient(from 180deg, #ffb3b3, #ffe9a7, #fff, #ffb3b3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      box-shadow: var(--shadow);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.25rem;
+      font-size: 0.95rem;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text);
+      padding-bottom: 2px;
+      border-bottom: 2px solid transparent;
+      transition: 0.2s;
+    }
+
+    .nav-links a:hover {
+      border-color: var(--primary-dark);
+      color: #e85d75;
+    }
+
+    .hero {
+      max-width: 1100px;
+      margin: 2.5rem auto;
+      padding: 1.2rem;
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .hero-text h1 {
+      font-size: clamp(2.2rem, 4vw, 2.8rem);
+      margin-bottom: 0.6rem;
+      color: #222;
+    }
+
+    .hero-text h1 span {
+      color: #e85d75;
+    }
+
+    .hero-text p {
+      font-size: 0.98rem;
+      margin-bottom: 1.2rem;
+      color: #555;
+    }
+
+    .badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .badge {
+      background: rgba(255, 179, 179, 0.12);
+      padding: 0.3rem 0.75rem;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    .badge span {
+      font-size: 0.9rem;
+    }
+
+    .hero-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      align-items: center;
+    }
+
+    .btn-primary,
+    .btn-ghost {
+      border-radius: 999px;
+      padding: 0.6rem 1.3rem;
+      font-size: 0.9rem;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.15s ease, box-shadow 0.15s ease,
+        background 0.15s ease, color 0.15s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+      color: #fff;
+      box-shadow: var(--shadow);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 12px 24px rgba(232, 93, 117, 0.25);
+    }
+
+    .btn-ghost {
+      background: rgba(255, 255, 255, 0.85);
+      color: #e85d75;
+      border: 1px solid rgba(232, 93, 117, 0.4);
+    }
+
+    .btn-ghost:hover {
+      background: #ffe9f0;
+      transform: translateY(-1px);
+    }
+
+    .hero-meta {
+      font-size: 0.78rem;
+      color: #777;
+      margin-top: 0.6rem;
+    }
+
+    .hero-image {
+      background: radial-gradient(circle at top, #ffe9a7 0, #ffd1dc 40%, #fff 70%);
+      border-radius: 25px;
+      padding: 1.4rem;
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-image-inner {
+      background: #fff;
+      border-radius: 18px;
+      padding: 1.2rem;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.8rem;
+      font-size: 0.8rem;
+    }
+
+    .mini-card {
+      background: var(--card-bg);
+      border-radius: 16px;
+      padding: 0.7rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .mini-card-title {
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+
+    .mini-card-tag {
+      font-size: 0.7rem;
+      color: #777;
+    }
+
+    .price {
+      font-weight: 700;
+      color: #e85d75;
+    }
+
+    .tag-pastel {
+      position: absolute;
+      right: 1.1rem;
+      top: 1.1rem;
+      background: rgba(255,255,255,0.85);
+      border-radius: 999px;
+      padding: 0.4rem 0.9rem;
+      font-size: 0.75rem;
+      box-shadow: var(--shadow);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .section {
+      max-width: 1100px;
+      margin: 0 auto 2.7rem auto;
+      padding: 0 1.2rem;
+    }
+
+    .section-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.2rem;
+    }
+
+    .section-title h2 {
+      font-size: 1.4rem;
+    }
+
+    .section-title p {
+      font-size: 0.85rem;
+      color: #777;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+      gap: 1.2rem;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      padding: 1rem;
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 26px rgba(0,0,0,0.08);
+    }
+
+    .pill {
+      font-size: 0.7rem;
+      padding: 0.2rem 0.6rem;
+      border-radius: 999px;
+      background: rgba(255, 179, 179, 0.18);
+      color: #d1546c;
+      width: fit-content;
+    }
+
+    .card h3 {
+      font-size: 1rem;
+    }
+
+    .card p {
+      font-size: 0.85rem;
+      color: #666;
+    }
+
+    .card-footer {
+      margin-top: auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.8rem;
+    }
+
+    .rating {
+      color: #ffb300;
+      font-size: 0.9rem;
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-top: 0.4rem;
+      font-size: 0.75rem;
+    }
+
+    .chip {
+      padding: 0.2rem 0.55rem;
+      border-radius: 999px;
+      background: #fff3cd;
+      color: #856404;
+    }
+
+    .chip.alt {
+      background: #e0f7fa;
+      color: #006064;
+    }
+
+    .banner {
+      background: linear-gradient(120deg, #ffe9a7, #ffb3b3);
+      border-radius: 22px;
+      padding: 1.1rem 1.2rem;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.8rem;
+      color: #5a3a2b;
+      box-shadow: var(--shadow);
+      font-size: 0.9rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .banner span {
+      font-size: 1.05rem;
+      font-weight: 600;
+    }
+
+    .banner-time {
+      font-size: 0.8rem;
+    }
+
+    footer {
+      border-top: 1px solid #f2d0d4;
+      padding: 1.3rem 1.2rem 2rem;
+      font-size: 0.78rem;
+      color: #888;
+      background: #fffafc;
+    }
+
+    footer .footer-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 0.8rem;
+      align-items: center;
+    }
+
+    footer a {
+      color: #e85d75;
+      text-decoration: none;
+    }
+
+    @media (max-width: 768px) {
+      .hero {
+        grid-template-columns: minmax(0, 1fr);
+        margin-top: 1.6rem;
+      }
+      .hero-image {
+        order: -1;
+      }
+      .nav-links {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Top navigation -->
+  <header>
+    <div class="nav">
+      <div class="logo">
+        <div class="logo-icon">🍰</div>
+        Lucky Bakery
+      </div>
+      <nav class="nav-links">
+        <a href="#menu">Menu</a>
+        <a href="#specials">Specials</a>
+        <a href="#visit">Visit us</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero / welcome section -->
+  <main>
+    <section class="hero">
+      <div class="hero-text">
+        <h1>Welcome to <span>Lucky Bakery</span> 🧁</h1>
+        <p>
+          Freshly baked breads, cakes, and pastries made every morning with
+          simple ingredients and a lot of love. Your sweet start (or end) to the day.
+        </p>
+
+        <div class="badges">
+          <div class="badge">⭐ <span>Since 2018</span></div>
+          <div class="badge">🥐 <span>Handmade daily</span></div>
+          <div class="badge">🚚 <span>Same-day delivery</span></div>
+        </div>
+
+        <div class="hero-buttons">
+          <button class="btn-primary">
+            View Today’s Menu
+          </button>
+          <button class="btn-ghost">
+            Order for Pickup
+          </button>
+        </div>
+        <p class="hero-meta">
+          Open daily • 7:00 AM – 9:00 PM • <strong>First order gets a free cookie!</strong>
+        </p>
+      </div>
+
+      <div class="hero-image">
+        <div class="tag-pastel">
+          🕒 Fresh batch every 60 min
+        </div>
+        <div class="hero-image-inner">
+          <article class="mini-card">
+            <div class="mini-card-title">Strawberry Dream Cake</div>
+            <div class="mini-card-tag">Best seller • 1kg</div>
+            <div class="price">₹799</div>
+          </article>
+
+          <article class="mini-card">
+            <div class="mini-card-title">Classic Sourdough</div>
+            <div class="mini-card-tag">Naturally fermented</div>
+            <div class="price">₹249</div>
+          </article>
+
+          <article class="mini-card">
+            <div class="mini-card-title">Coffee Croissant Box</div>
+            <div class="mini-card-tag">Box of 4</div>
+            <div class="price">₹299</div>
+          </article>
+
+          <article class="mini-card">
+            <div class="mini-card-title">Custom Birthday Cake</div>
+            <div class="mini-card-tag">Pre-order 24 hours</div>
+            <div class="price">From ₹1,199</div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Signature menu section -->
+    <section id="menu" class="section">
+      <div class="section-title">
+        <h2>Signature Favourites</h2>
+        <p>Most loved items by our regulars.</p>
+      </div>
+
+      <div class="grid">
+        <article class="card">
+          <div class="pill">Cakes</div>
+          <h3>Choco Hazelnut Overload</h3>
+          <p>Moist chocolate sponge layered with rich hazelnut cream and dark chocolate ganache.</p>
+          <div class="chips">
+            <span class="chip">Eggless option</span>
+            <span class="chip alt">Birthday favourite</span>
+          </div>
+          <div class="card-footer">
+            <span class="price">₹899</span>
+            <span class="rating">★ 4.9</span>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="pill">Pastries</div>
+          <h3>Almond Croissant</h3>
+          <p>Flaky, buttery layers filled with almond cream and topped with toasted nuts.</p>
+          <div class="chips">
+            <span class="chip">Best with coffee</span>
+          </div>
+          <div class="card-footer">
+            <span class="price">₹129</span>
+            <span class="rating">★ 4.8</span>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="pill">Bread</div>
+          <h3>Multigrain Loaf</h3>
+          <p>Soft, hearty loaf with oats, seeds, and grains. Perfect for sandwiches or toast.</p>
+          <div class="chips">
+            <span class="chip alt">No preservatives</span>
+          </div>
+          <div class="card-footer">
+            <span class="price">₹199</span>
+            <span class="rating">★ 4.7</span>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="pill">Special</div>
+          <h3>Lotus Biscoff Cheesecake</h3>
+          <p>Creamy baked cheesecake on a crunchy biscuit base with caramelised biscuit crumble.</p>
+          <div class="chips">
+            <span class="chip">Limited stock</span>
+          </div>
+          <div class="card-footer">
+            <span class="price">₹249 / slice</span>
+            <span class="rating">★ 5.0</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Specials / banner -->
+    <section id="specials" class="section">
+      <div class="banner">
+        <div>
+          <span>✨ Welcome Offer:</span> Flat 10% off on your first online order.
+          <div class="banner-time">Use code <strong>LUCKY10</strong> at checkout.</div>
+        </div>
+        <button class="btn-primary">
+          Order Now
+        </button>
+      </div>
+    </section>
+
+    <!-- Visit us -->
+    <section id="visit" class="section">
+      <div class="section-title">
+        <h2>Visit Lucky Bakery</h2>
+        <p>Drop in, say hi, and watch the next batch come out of the oven.</p>
+      </div>
+      <div class="grid">
+        <article class="card">
+          <h3>Store Hours</h3>
+          <p>
+            Monday – Sunday<br />
+            <strong>7:00 AM – 9:00 PM</strong>
+          </p>
+        </article>
+        <article class="card">
+          <h3>Location</h3>
+          <p>
+            Lucky Bakery<br />
+            Your Street Name<br />
+            Your City, Your Country
+          </p>
+        </article>
+        <article class="card">
+          <h3>Contact</h3>
+          <p>
+            Phone: +91-98765-43210<br />
+            Email: hello@luckybakery.com
+          </p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-inner">
+      <span>© <span id="year"></span> Lucky Bakery. All rights reserved.</span>
+      <span>
+        Made with ❤️ &nbsp;|&nbsp;
+        <a href="#top">Back to top</a>
+      </span>
+    </div>
+  </footer>
+
+  <script>
+    // set current year in footer
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
